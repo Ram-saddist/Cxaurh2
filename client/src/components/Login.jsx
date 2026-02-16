@@ -1,8 +1,10 @@
-import React, { useState } from 'react'
+import React, { useState,useContext } from 'react'
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
-export default function Login() {
+import { AuthContext } from '../context/AuthContext.jsx'
 
+export default function Login() {
+ const {loginUser} = useContext(AuthContext)
   const [loginFormData, setLoginFormData] = useState({
     email: "", password: ""
   })
@@ -14,8 +16,9 @@ export default function Login() {
         console.log(res)
         if(res.status==200){
           alert("User loggerd in successfully")
-          localStorage.setItem("token",res.data.token)
-          navigate("/")
+          //localStorage.setItem("token",res.data.token)
+          //navigate("/")
+          loginUser(res.data)
         }
       })
       .catch(err=>{

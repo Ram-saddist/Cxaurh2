@@ -4,7 +4,7 @@ require("dotenv").config()
 const cors =require("cors")
 const mongoose=require("mongoose")
 const authRoutes=require("./routes/auth.js")
-
+const cookieParser= require("cookie-parser")
 
 app.use(cors({
     origin:"http://localhost:5173",
@@ -12,6 +12,7 @@ app.use(cors({
 }))
 app.use(express.json())
 app.use(express.urlencoded({extended:true}))
+app.use(cookieParser())
 
 mongoose.connect(process.env.MONGODB_URL)
     .then(()=>{
